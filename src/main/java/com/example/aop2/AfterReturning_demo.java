@@ -6,7 +6,9 @@ import com.example.aop2.dao.MembershipDAO;
 import com.example.aop2.entity.Account;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class Main {
+import java.util.List;
+
+public class AfterReturning_demo {
     public static void main(String[] args) {
 
         // read Spring config java class
@@ -15,24 +17,13 @@ public class Main {
 
         // get the bean from spring container
         AccountDAO accountDAO = context.getBean("accountDAO", AccountDAO.class);
-        MembershipDAO membershipDAO = context.getBean("membershipDAO", MembershipDAO.class);
 
-        // call the business method
-        Account account = new Account();
-        accountDAO.addAccount(account, true);
-        accountDAO.doWork();
-        accountDAO.goToSleep();
+        List<Account> accounts = accountDAO.findAccounts();
 
-        // call the accountDAO getter/setter methods
-        accountDAO.setName("kek");
-        accountDAO.setServiceCode("gold");
+        System.out.println("\n\nMain program: AfterReturning_demo");
+        System.out.println("----");
 
-        String name = accountDAO.getName();
-        String code = accountDAO.getServiceCode();
-
-
-        // call the membership business method
-        membershipDAO.addAccount();
+        System.out.println(accounts + "\n");
 
         context.close();
     }
