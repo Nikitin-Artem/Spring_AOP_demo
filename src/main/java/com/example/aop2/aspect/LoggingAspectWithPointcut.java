@@ -17,6 +17,8 @@ public class LoggingAspectWithPointcut {
     // the @After advice method is invoked AFTER any @AfterReturning or @AfterThrowing advice methods in the same aspect class
     @After("com.example.aop2.aspect.AopExpressions.forDaoPackageNoGetterSetter()")
     public void afterFinallyFindAccountsAdvice(JoinPoint joinPoint){
+
+        // print out witch method we are advising on
         String method = joinPoint.getSignature().toShortString();
         System.out.println("\n>> Executing @After (finally) on method: " + method);
     }
